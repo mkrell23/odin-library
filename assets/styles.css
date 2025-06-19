@@ -52,5 +52,4 @@ dialog form {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    box-shadow: 10px 12px 9px gray;
 }
