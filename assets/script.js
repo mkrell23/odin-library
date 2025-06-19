@@ -67,8 +67,9 @@ addButton.addEventListener('click', () => {
 }
 );
 
-closePopup.addEventListener('click', () => {
+closePopup.addEventListener('click', (e) => {
     addPopup.close()
+    e.preventDefault();
 });
 
 addBookBtn.addEventListener('click', (e) => {
@@ -77,7 +78,6 @@ addBookBtn.addEventListener('click', (e) => {
     const bookYear = year.value;
     const bookRead = read.checked;
     addAndDisplayBook(bookTitle, bookAuthor, bookYear, bookRead);
-    // addBookToLibrary(bookTitle, bookAuthor, bookYear, bookRead)
     e.preventDefault();
     addPopup.close()
     title.value = "";
