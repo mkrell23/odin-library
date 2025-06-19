@@ -4,6 +4,10 @@ const addButton = document.getElementById("add");
 const addPopup = document.getElementById("addPopup")
 const closePopup = document.getElementById("close")
 const addBookBtn = document.getElementById("addBook")
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const year = document.getElementById("year");
+const read = document.getElementById("read");
 
 function Book(title, author, year, read = false){
     if (!new.target) {
@@ -56,7 +60,7 @@ function addAndDisplayBook(title, author, year, read = false){
     addBookToLibrary(title, author, year, read)
     container.innerHTML = "";
     displayBooks()
-}
+};
 
 addButton.addEventListener('click', () => {
     addPopup.showModal()
@@ -65,7 +69,22 @@ addButton.addEventListener('click', () => {
 
 closePopup.addEventListener('click', () => {
     addPopup.close()
-})
+});
+
+addBookBtn.addEventListener('click', (e) => {
+    const bookTitle = title.value;
+    const bookAuthor = author.value;
+    const bookYear = year.value;
+    const bookRead = read.checked;
+    addAndDisplayBook(bookTitle, bookAuthor, bookYear, bookRead);
+    // addBookToLibrary(bookTitle, bookAuthor, bookYear, bookRead)
+    e.preventDefault();
+    addPopup.close()
+    title.value = "";
+    author.value = "";
+    year.value = "";
+    read.checked = false;
+});
 
 addBookToLibrary("Player Piano", "Vonnegut", 1952, true);
 addBookToLibrary("The Sirens of Titan", "Vonnegut", 1959, true);
