@@ -1,5 +1,9 @@
 const library = [];
 const container = document.getElementById("container");
+const addButton = document.getElementById("add");
+const addPopup = document.getElementById("addPopup")
+const closePopup = document.getElementById("close")
+const addBookBtn = document.getElementById("addBook")
 
 function Book(title, author, year, read = false){
     if (!new.target) {
@@ -48,6 +52,21 @@ function displayBooks(){
 */
 }
 
+function addAndDisplayBook(title, author, year, read = false){
+    addBookToLibrary(title, author, year, read)
+    container.innerHTML = "";
+    displayBooks()
+}
+
+addButton.addEventListener('click', () => {
+    addPopup.showModal()
+}
+);
+
+closePopup.addEventListener('click', () => {
+    addPopup.close()
+})
+
 addBookToLibrary("Player Piano", "Vonnegut", 1952, true);
 addBookToLibrary("The Sirens of Titan", "Vonnegut", 1959, true);
 addBookToLibrary("Mother Night", "Vonnegut", 1961, true);
@@ -63,4 +82,7 @@ addBookToLibrary("Hocus Pocus", "Vonnegut", 1990, false);
 addBookToLibrary("Timequake", "Vonnegut", 1997, true);
 addBookToLibrary("Fight Club", "Palahniuk", 1996, true);
 
-displayBooks()
+displayBooks();
+
+addAndDisplayBook("House of Leaves", "Danielewski", 2000, true);
+
