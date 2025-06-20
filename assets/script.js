@@ -64,6 +64,9 @@ function displayBooks(){
         card.setAttribute("data-id", book.id)
         const title = document.createElement("h3");
         title.innerText = book.title;
+        const titleWrapper = document.createElement("div");
+        titleWrapper.classList.add("card-title");
+        titleWrapper.appendChild(title);
         const author = document.createElement("h4");
         author.innerText = book.author;
         const year = document.createElement("p");
@@ -77,7 +80,7 @@ function displayBooks(){
         delButton.classList.add("delete");
         delButton.innerText = "Delete Book";
         delButton.addEventListener('click', deleteBook);
-        card.appendChild(title);
+        card.appendChild(titleWrapper);
         card.appendChild(author);
         card.appendChild(year);
         card.appendChild(read);
