@@ -26,12 +26,27 @@ function addBookToLibrary(title, author, year, read = false){
     library.push(book);
 }
 
+function deleteBook(event){
+    const parent = this.parentElement;
+    parent.remove();
+    removeBookFromLibrary(parent.dataset.id);
+}
+
+function removeBookFromLibrary(id){
+    for (let i = 0; i < library.length; i++) {
+        if (library[i].id == id) {
+            library.splice(i, 1);
+        }
+    }
+}
+
 
 function displayBooks(){
     for (let i = 0; i < library.length; i++) {
         const book = library[i];
         const card = document.createElement("div");
         card.classList.add("card");
+        card.setAttribute("data-id", book.id)
         const title = document.createElement("h3");
         title.innerText = book.title;
         const author = document.createElement("h4");
@@ -40,10 +55,15 @@ function displayBooks(){
         year.innerText = book.year;
         const read = document.createElement("p");
         book.read ? read.innerText = "Read" : read.innerText = "Not Read"
+        const button = document.createElement("button");
+        button.classList.add("delete");
+        button.innerText = "Delete Book";
+        button.addEventListener('click', deleteBook);
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(year);
         card.appendChild(read);
+        card.appendChild(button)
         container.appendChild(card);
     }
 /*
