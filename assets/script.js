@@ -21,6 +21,10 @@ function Book(title, author, year, read = false){
     this.id = crypto.randomUUID();
 }
 
+Book.prototype.isRead = function(bool){
+    this.read = bool
+}
+
 function addBookToLibrary(title, author, year, read = false){
     var book = new Book(title, author, year, read);
     library.push(book);
@@ -40,6 +44,17 @@ function removeBookFromLibrary(id){
     }
 }
 
+function readBook(event){
+    const parent = this.parentElement;
+    for (let i = 0; i < library.length; i++) {
+        const book = library[i];
+        if (book.id == parent.dataset.id){
+            book.read ? book.isRead(false) :book.isRead(true);        
+        }
+    }
+    redisplayBooks()
+}
+
 
 function displayBooks(){
     for (let i = 0; i < library.length; i++) {
@@ -54,16 +69,20 @@ function displayBooks(){
         const year = document.createElement("p");
         year.innerText = book.year;
         const read = document.createElement("p");
-        book.read ? read.innerText = "Read" : read.innerText = "Not Read"
-        const button = document.createElement("button");
-        button.classList.add("delete");
-        button.innerText = "Delete Book";
-        button.addEventListener('click', deleteBook);
+        read.innerText = book.read ? "Read" : "Not Read";
+        const readButton = document.createElement("button");
+        readButton.innerText = book.read ? "Mark Unread" : "Mark Read";
+        readButton.addEventListener('click', readBook);
+        const delButton = document.createElement("button");
+        delButton.classList.add("delete");
+        delButton.innerText = "Delete Book";
+        delButton.addEventListener('click', deleteBook);
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(year);
         card.appendChild(read);
-        card.appendChild(button)
+        card.appendChild(readButton);
+        card.appendChild(delButton)
         container.appendChild(card);
     }
 /*
@@ -76,10 +95,14 @@ function displayBooks(){
 */
 }
 
-function addAndDisplayBook(title, author, year, read = false){
-    addBookToLibrary(title, author, year, read)
+function redisplayBooks(){
     container.innerHTML = "";
     displayBooks()
+}
+
+function addAndDisplayBook(title, author, year, read = false){
+    addBookToLibrary(title, author, year, read)
+    redisplayBooks()
 };
 
 addButton.addEventListener('click', () => {
