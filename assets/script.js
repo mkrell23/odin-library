@@ -30,7 +30,7 @@ function addBookToLibrary(title, author, year, read = false){
     library.push(book);
 }
 
-function deleteBook(event){
+function deleteBook(){
     const parent = this.parentElement;
     parent.remove();
     removeBookFromLibrary(parent.dataset.id);
@@ -44,7 +44,7 @@ function removeBookFromLibrary(id){
     }
 }
 
-function readBook(event){
+function readBook(){
     const parent = this.parentElement;
     for (let i = 0; i < library.length; i++) {
         const book = library[i];
