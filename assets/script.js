@@ -9,21 +9,21 @@ const author = document.getElementById("author");
 const year = document.getElementById("year");
 const read = document.getElementById("read");
 
-function Book(title, author, year, read = false){
-    if (!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
+
+class Book{
+    constructor(title, author, year, read = false) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.read = read; 
+        this.id = crypto.randomUUID();
     }
 
-    this.title = title;
-    this.author = author;
-    this.year = year;
-    this.read = read; 
-    this.id = crypto.randomUUID();
+    isRead (bool){
+        this.read = bool 
+    }
 }
 
-Book.prototype.isRead = function(bool){
-    this.read = bool
-}
 
 function addBookToLibrary(title, author, year, read = false){
     var book = new Book(title, author, year, read);
